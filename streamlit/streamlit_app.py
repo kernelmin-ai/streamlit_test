@@ -1,6 +1,11 @@
 import streamlit as st
 import pickle
 import numpy as np
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from src.model.movie_predictor import MoviePredictor
 
 # 페이지 설정
@@ -12,7 +17,7 @@ st.write("영화 정보를 입력하면 예상 평점을 예측합니다.")
 # 모델 로드
 @st.cache_resource
 def load_model():
-    with open("models/movie_predictor/E10_T260304180143.pkl", "rb") as f:
+    with open("../models/movie_predictor/E10_T260304180143.pkl", "rb") as f:
         ck = pickle.load(f)
 
     model = MoviePredictor(**ck["model_params"])
