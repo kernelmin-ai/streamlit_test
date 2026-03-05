@@ -17,7 +17,17 @@ st.write("영화 정보를 입력하면 예상 평점을 예측합니다.")
 # 모델 로드
 @st.cache_resource
 def load_model():
-    with open("../models/movie_predictor/E10_T260304180143.pkl", "rb") as f:
+
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    model_path = os.path.join(
+        BASE_DIR,
+        "models",
+        "movie_predictor",
+        "E10_T260304180143.pkl"
+    )
+
+    with open(model_path, "rb") as f:
         ck = pickle.load(f)
 
     model = MoviePredictor(**ck["model_params"])
